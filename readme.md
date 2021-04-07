@@ -5,6 +5,8 @@
 
 Generate `package.json` file with packages from your bundle using Rollup.
 
+V2 Fork allow exclude packages from dependencies section.
+
 ## About
 
 This plugin is useful when you have a lot of packages in your current `package.json` file and want to create a lean one with only packages from your generated bundle, probably for deployment.
@@ -40,6 +42,19 @@ export default {
 ### Configuration
 
 There are some useful options, all of them are optional:
+
+#### excludeDependencies
+
+Type: `array`\
+Default: `[]`
+
+Exclude packages from dependencies section.
+
+```js
+generatePackageJson({
+    excludeDependencies: ['package-name']
+})
+```
 
 #### inputFolder
 
@@ -92,7 +107,7 @@ It can also be a function, which receives the contents of the input `package.jso
 generatePackageJson({
   baseContents: (pkg) => ({
     name: pkg.name,
-    main: pkg.main.replace('src', 'dist')
+    main: pkg.main.replace('src', 'dist'),
     dependencies: {},
     private: true
   })

@@ -33,7 +33,8 @@ export default function generatePackageJson(options = {}) {
     additionalDependencies = [],
     baseContents = {},
     inputFolder,
-    outputFolder
+    outputFolder,
+    excludeDependencies = [],
   } = options
 
   return {
@@ -64,7 +65,7 @@ export default function generatePackageJson(options = {}) {
       const generatedDependencies = {}
 
       dependencies.forEach((dependency) => {
-        if (inputFileDependencies && inputFileDependencies[dependency]) {
+        if (inputFileDependencies && inputFileDependencies[dependency] && !excludeDependencies.includes(dependency)) {
           generatedDependencies[dependency] = inputFileDependencies[dependency]
         }
 
